@@ -32,8 +32,8 @@ module.exports = function(options, stepName) {
     );
     const dockerImage = step.image || template.getRootImage();
     const imageName = docker.extractImageName(dockerImage);
-    console.log(
-      `executing step${stepName ? ` "${stepName}"` : ""} in "${imageName}"`
+    console.log('\x1b[33m%s\x1b[0m',
+      `executing step${stepName ? ` "${stepName}"` : ` "${step.name}"`} in "${imageName}"`
     );
     exec(step.script, imageName, options);
   }

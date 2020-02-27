@@ -6,7 +6,7 @@ function exec(script, image, flags) {
   const commands = [].concat(
     environmentVars.map(x => `export ${x}`),
     "set -e",
-    script
+    script.flatMap(x => [`echo -e "\\033[0;36m* ${x}\\033[0;00m"`, x])
   );
   docker.run(commands, image, flags.dryRun, flags.interactive, flags.workDir, flags.ignoreFolder);
 }
